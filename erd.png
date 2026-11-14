@@ -1,0 +1,141 @@
+erDiagram
+    %% Quan he giua cac bang
+    PhongBan ||--o{ NguoiDung : "Co"
+    PhongBan ||--o{ PhongBan : "Truc thuoc"
+    ChucDanh ||--o{ NguoiDung : "Co"
+    NguoiDung ||--o{ NguoiDung : "Quan ly"
+    
+    VaiTro ||--o{ NguoiDungVaiTro : "Thuoc"
+    NguoiDung ||--o{ NguoiDungVaiTro : "Thuoc"
+    
+    NguoiDung ||--o{ HoSoDeNghi : "Tao"
+    NguoiDung ||--o{ BuocXuLyHoSo : "Xu ly"
+    NguoiDung ||--o{ LichSuXuLy : "Thuc hien"
+    NguoiDung ||--o{ BuocQuyTrinh : "Phu trach"
+    
+    LoaiDeNghi ||--o{ HoSoDeNghi : "Phan loai"
+    LoaiDeNghi ||--o{ QuyTrinhPheDuyet : "Ap dung"
+    
+    QuyTrinhPheDuyet ||--|{ BuocQuyTrinh : "Bao gom"
+    QuyTrinhPheDuyet ||--o{ HoSoDeNghi : "Thuc thi"
+    
+    BuocQuyTrinh ||--o{ HoSoDeNghi : "Buoc hien tai"
+    BuocQuyTrinh ||--o{ BuocXuLyHoSo : "Chi tiet"
+    
+    HoSoDeNghi ||--o{ BuocXuLyHoSo : "Gom cac buoc"
+    HoSoDeNghi ||--o{ LichSuXuLy : "Ghi nhan"
+    
+    HoSoDeNghi ||--o{ DeNghiDinhKem : "Dinh kem"
+    TepDinhKem ||--o{ DeNghiDinhKem : "Chua"
+    
+    %% Chi tiet cac bang voi kieu du lieu SQL Server
+    PhongBan {
+        INT MaPhongBan PK
+        NVARCHAR(255) TenPhongBan
+        BIT TrangThai
+        INT MaPhongBanCha FK
+    }
+    
+    ChucDanh {
+        INT MaChucDanh PK
+        NVARCHAR(255) TenChucDanh
+    }
+    
+    VaiTro {
+        INT MaVaiTro PK
+        NVARCHAR(255) TenVaiTro
+    }
+    
+    NguoiDung {
+        INT MaNguoiDung PK
+        NVARCHAR(255) TenDangNhap
+        NVARCHAR(255) HoTen
+        NVARCHAR(255) Email
+        NVARCHAR(255) MatKhau
+        BIT TrangThai
+        INT MaPhongBan FK
+        INT MaChucDanh FK
+        INT MaNguoiQuanLy FK
+    }
+    
+    NguoiDungVaiTro {
+        INT MaNguoiDung PK,FK
+        INT MaVaiTro PK,FK
+    }
+    
+    LoaiDeNghi {
+        INT MaLoai PK
+        NVARCHAR(255) TenLoai
+        VARCHAR(50) MaKyThuat
+        BIT TrangThaiSuDung
+    }
+    
+    QuyTrinhPheDuyet {
+        INT MaQuyTrinh PK
+        INT MaLoai FK
+        NVARCHAR(255) TenQuyTrinh
+        INT PhienBan
+        BIT TrangThaiApDung
+    }
+    
+    BuocQuyTrinh {
+        INT MaBuoc PK
+        NVARCHAR(255) TenBuoc
+        INT ThuTuBuoc
+        INT ThoiHanXuLyGio
+        NVARCHAR(255) DieuKienApDung
+        INT MaQuyTrinh FK
+        INT MaNguoiDung FK
+    }
+    
+    HoSoDeNghi {
+        INT MaHoSo PK
+        VARCHAR(255) SoHoSo
+        NVARCHAR(50) TrangThai
+        NVARCHAR(MAX) NoiDung
+        DATE NgayBatDau
+        DATE NgayKetThuc
+        NVARCHAR(255) DiaDiem
+        FLOAT KinhPhi
+        DATETIME NgayTao
+        INT MaLoai FK
+        INT MaQuyTrinh FK
+        INT MaBuoc FK
+        INT MaNguoiDung FK
+    }
+    
+    BuocXuLyHoSo {
+        INT MaBuocXuLy PK
+        DATETIME ThoiDiemNhan
+        DATETIME HanXuLy
+        DATETIME ThoiDiemHoanTat
+        NVARCHAR(50) KetQua
+        NVARCHAR(MAX) YKien
+        FLOAT ThoiGianXuLyGio
+        BIT QuaHan
+        INT MaHoSo FK
+        INT MaBuoc FK
+        INT MaNguoiDung FK
+    }
+    
+    LichSuXuLy {
+        INT MaDong PK
+        NVARCHAR(MAX) NoiDung
+        DATETIME ThoiDiem
+        INT MaHoSo FK
+        INT MaNguoiDung FK
+    }
+    
+    TepDinhKem {
+        INT MaTep PK
+        NVARCHAR(255) TenTep
+        VARCHAR(100) LoaiTep
+        INT KichThuoc
+        VARBINARY(MAX) DuLieuTep
+        DATETIME NgayTaiLen
+    }
+    
+    DeNghiDinhKem {
+        INT MaTep PK,FK
+        INT MaHoSo PK,FK
+    }
