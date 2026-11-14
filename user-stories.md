@@ -1,0 +1,9 @@
+# User Stories – Internal Approval Workflow Management System
+
+| ID | Role | User Story | Acceptance Criteria | Priority |
+| :--- | :--- | :--- | :--- | :--- |
+| **US-01** | Employee | As an employee, I want to create a new internal request (e.g., leave request, purchasing proposal) using a predefined electronic form, so that I don't have to use paper forms. | - Form validates required fields based on request type.<br>- Can attach up to 5 files (max 10MB/file).<br>- Can save as "Draft" or submit directly. | High |
+| **US-02** | Employee | As an employee, I want to track the current status and processing history of my submitted requests, so that I know who is currently reviewing them. | - Status updates in real-time (Pending, Approved, Rejected, Revision Required).<br>- Detailed timeline of actions is visible in the "Processing History" section. | High |
+| **US-03** | Approver | As an approver, I want to view a list of requests assigned to me and process them (Approve, Reject, or Request Revision), so that workflows can proceed. | - Only sees requests corresponding to their assigned step in the workflow.<br>- Rejecting or Requesting Revision requires a mandatory comment. | High |
+| **US-04** | Admin | As an administrator, I want to configure multi-step approval workflows for different request types, so that the system can automatically route requests to the correct approvers. | - Can define steps, assign approver roles, and set processing time limits (SLA) in hours.<br>- Can activate or deactivate workflows. | High |
+| **US-05** | Approver | As a manager, I want to view statistical reports on request processing times and overdue requests, so that I can identify bottlenecks in the workflow. | - Dashboard displays average processing time, overdue count, and overdue percentage.<br>- Can filter data by date range, department, and request type. | Medium |
